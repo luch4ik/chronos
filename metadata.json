@@ -1,0 +1,7 @@
+{
+  "name": "Chronos",
+  "description": "A neo-brutalist alarm clock with high-contrast UI and wake-up challenges.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

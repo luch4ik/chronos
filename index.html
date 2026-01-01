@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#E0E7FF" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#18181B" media="(prefers-color-scheme: dark)">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Chronos | Alarm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --c-bg: #E0E7FF;
+        --c-surface: #FFFFFF;
+        --c-surface-hover: #F4F4F5;
+        --c-border: #000000;
+        --c-text-main: #000000;
+        --c-text-muted: #52525B;
+        --c-accent: #8B5CF6;
+        --c-accent-hover: #7C3AED;
+        --c-accent-text: #FFFFFF;
+        
+        --border-width: 2px;
+        --shadow-hard: 4px 4px 0px 0px #000000;
+        --shadow-hard-sm: 2px 2px 0px 0px #000000;
+        --shadow-hard-hover: 6px 6px 0px 0px #000000;
+      }
+      
+      .dark {
+        --c-bg: #18181B;
+        --c-surface: #27272A;
+        --c-surface-hover: #3F3F46;
+        --c-border: #000000;
+        --c-text-main: #F4F4F5;
+        --c-text-muted: #A1A1AA;
+        --c-accent: #A78BFA;
+        --c-accent-hover: #8B5CF6;
+        --c-accent-text: #000000;
+        
+        --border-width: 2px;
+        --shadow-hard: 4px 4px 0px 0px #000000;
+        --shadow-hard-sm: 2px 2px 0px 0px #000000;
+        --shadow-hard-hover: 6px 6px 0px 0px #000000;
+      }
+
+      body {
+        margin: 0;
+        background-color: var(--c-bg);
+        color: var(--c-text-main);
+        font-family: 'Inter', sans-serif;
+        transition: background-color 0.4s ease, color 0.4s ease;
+        -webkit-tap-highlight-color: transparent;
+        overflow-x: hidden;
+        user-select: none;
+        touch-action: manipulation;
+      }
+      
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+
+      input, textarea {
+        user-select: text;
+        font-family: 'Space Grotesk', sans-serif;
+      }
+      
+      button {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+
+      input:focus, select:focus, textarea:focus, button:focus {
+        outline: none;
+      }
+
+      * {
+        transition-property: background-color, border-color, color, fill, stroke, opacity, transform, box-shadow;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+      }
+      
+      .brutal-border {
+        border: var(--border-width) solid var(--c-border);
+      }
+      
+      .brutal-shadow {
+        box-shadow: var(--shadow-hard);
+      }
+      
+      .brutal-shadow-sm {
+        box-shadow: var(--shadow-hard-sm);
+      }
+      
+      .brutal-shadow:active {
+        box-shadow: 0px 0px 0px 0px #000000;
+        transform: translate(4px, 4px);
+      }
+
+      ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+            },
+            colors: {
+              bg: 'var(--c-bg)',
+              surface: 'var(--c-surface)',
+              surfaceHover: 'var(--c-surface-hover)',
+              border: 'var(--c-border)',
+              textMain: 'var(--c-text-main)',
+              textMuted: 'var(--c-text-muted)',
+              accent: 'var(--c-accent)',
+              accentHover: 'var(--c-accent-hover)',
+              accentText: 'var(--c-accent-text)',
+            },
+            boxShadow: {
+              'hard': 'var(--shadow-hard)',
+              'hard-sm': 'var(--shadow-hard-sm)',
+              'hard-lg': 'var(--shadow-hard-hover)',
+            },
+            borderRadius: {
+              'base': '8px',
+              'lg': '12px',
+              'xl': '16px',
+            },
+            borderWidth: {
+              '3': '3px',
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "uuid": "https://aistudiocdn.com/uuid@^13.0.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.25"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
