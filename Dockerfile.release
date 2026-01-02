@@ -1,0 +1,28 @@
+FROM docker.io/eclipse-temurin:17-jdk
+
+# Install required tools
+RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists/*
+
+# Set up Android SDK
+ENV ANDROID_SDK_ROOT=/opt/android-sdk
+ENV ANDROID_HOME=/opt/android-sdk
+RUN mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools && \
+    cd ${ANDROID_SDK_ROOT}/cmdline-tools && \
+    wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip && \
+    unzip -q commandlinetools-linux-11076708_latest.zip && \
+    rm commandlinetools-linux-11076708_latest.zip && \
+    mv cmdline-tools latest
+
+# Accept licenses
+RUN yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+# Set working directory
+WORKDIR /project
+
+# Copy project files
+COPY . .
+
+# Build the release APK
+RUN ./gradlew assembleRelease --no-daemon --console=plain
+
+# The APK will be in app/build/outputs/apk/release/

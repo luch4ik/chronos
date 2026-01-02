@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Chronos</string>
+    <string name="alarm_notification_channel">Alarm Notifications</string>
+    <string name="watchdog_notification_channel">Watchdog Service</string>
+</resources>
