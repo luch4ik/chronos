@@ -1,6 +1,5 @@
 package com.chronos.alarm.ui.components
 
-/* PENDING CLAUDE REVIEW */
 // Phase 2: Design System - TimePicker
 // iOS-style wheel picker with haptic feedback on scroll
 // Matches React TimePickerWheel.tsx component
@@ -17,6 +16,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -24,6 +25,24 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import com.chronos.alarm.ui.utils.rememberHapticFeedback
 import com.chronos.alarm.ui.utils.HapticType
+
+// Helper function to add gradient fade mask at top and bottom
+private fun Modifier.gradientFadeMask(surfaceColor: Color): Modifier = this.drawWithContent {
+    drawContent()
+    // Draw gradient overlay
+    drawRect(
+        brush = Brush.verticalGradient(
+            colors = listOf(
+                surfaceColor,
+                Color.Transparent,
+                Color.Transparent,
+                surfaceColor
+            ),
+            startY = 0f,
+            endY = size.height
+        )
+    )
+}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -90,10 +109,12 @@ fun TimePicker(
         }
     }
 
+    val surfaceColor = MaterialTheme.colorScheme.surface
+
     Row(
         modifier = modifier
             .border(2.dp, Color.Black)
-            .background(MaterialTheme.colorScheme.surface)
+            .background(surfaceColor)
             .padding(16.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
@@ -107,7 +128,9 @@ fun TimePicker(
             LazyColumn(
                 state = hourListState,
                 flingBehavior = rememberSnapFlingBehavior(lazyListState = hourListState),
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .gradientFadeMask(surfaceColor)
             ) {
                 // Add padding items to allow first and last items to be centered
                 items(paddingItems) {
@@ -146,7 +169,9 @@ fun TimePicker(
             LazyColumn(
                 state = minuteListState,
                 flingBehavior = rememberSnapFlingBehavior(lazyListState = minuteListState),
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .gradientFadeMask(surfaceColor)
             ) {
                 // Add padding items to allow first and last items to be centered
                 items(paddingItems) {
