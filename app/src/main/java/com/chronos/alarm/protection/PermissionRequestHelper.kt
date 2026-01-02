@@ -250,7 +250,7 @@ class PermissionRequestHelper(private val context: Context) {
         val builder = StringBuilder()
         builder.appendLine("⚠️ PERMISSION SETUP REQUIRED")
         builder.appendLine()
-        builder.appendLine("${status.deniedPermissions.size} permissions need to be granted for full alarm protection:")
+        builder.appendLine("${status.deniedPermissions} permissions need to be granted for full alarm protection:")
         builder.appendLine()
 
         status.criticalDenied.forEach { permission ->

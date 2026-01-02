@@ -63,7 +63,7 @@ class WakeUpCheckManager(private val context: Context) {
         )
 
         val notification = NotificationCompat.Builder(context, "wake_up_check_channel")
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle("Are You Awake?")
             .setContentText("Tap to confirm you're actually awake!")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -72,7 +72,7 @@ class WakeUpCheckManager(private val context: Context) {
             .setOngoing(true)
             .setContentIntent(confirmPendingIntent)
             .addAction(
-                R.drawable.ic_launcher_foreground,
+                R.mipmap.ic_launcher,
                 "I'm Awake!",
                 confirmPendingIntent
             )

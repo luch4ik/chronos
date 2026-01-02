@@ -168,7 +168,7 @@ fun VelocityChallenge(
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                </Column>
+                }
             }
         } else {
             // Speed display

@@ -162,7 +162,7 @@ fun BluetoothChallenge(
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                </Column>
+                }
             }
         } else {
             // Target device
