@@ -33,25 +33,57 @@ fun TimePicker(
     onTimeChanged: (Int, Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val hourListState = rememberLazyListState(initialFirstVisibleItemIndex = hour)
-    val minuteListState = rememberLazyListState(initialFirstVisibleItemIndex = minute)
+    // Number of padding items above and below to allow centering
+    val paddingItems = 2
+
+    // Calculate initial scroll position to center the selected item
+    val hourListState = rememberLazyListState(initialFirstVisibleItemIndex = hour + paddingItems)
+    val minuteListState = rememberLazyListState(initialFirstVisibleItemIndex = minute + paddingItems)
     val coroutineScope = rememberCoroutineScope()
     val haptic = rememberHapticFeedback()
-    
-    LaunchedEffect(hourListState.firstVisibleItemIndex) {
+
+    // Track last reported values to avoid duplicate callbacks
+    var lastReportedHour by remember { mutableStateOf(hour) }
+    var lastReportedMinute by remember { mutableStateOf(minute) }
+
+    // Sync picker position when hour prop changes externally
+    LaunchedEffect(hour) {
+        if (hour != lastReportedHour && !hourListState.isScrollInProgress) {
+            hourListState.animateScrollToItem(hour + paddingItems)
+            lastReportedHour = hour
+        }
+    }
+
+    // Sync picker position when minute prop changes externally
+    LaunchedEffect(minute) {
+        if (minute != lastReportedMinute && !minuteListState.isScrollInProgress) {
+            minuteListState.animateScrollToItem(minute + paddingItems)
+            lastReportedMinute = minute
+        }
+    }
+
+    // Detect hour changes from user scrolling
+    LaunchedEffect(hourListState.firstVisibleItemIndex, hourListState.isScrollInProgress) {
         if (!hourListState.isScrollInProgress) {
-            val newHour = hourListState.firstVisibleItemIndex
-            if (newHour != hour) {
+            // The selected item is the one at the center, accounting for padding
+            val selectedIndex = hourListState.firstVisibleItemIndex - paddingItems
+            val newHour = selectedIndex.coerceIn(0, 23)
+            if (newHour != lastReportedHour) {
+                lastReportedHour = newHour
                 haptic.triggerHaptic(HapticType.LIGHT)
                 onTimeChanged(newHour, minute)
             }
         }
     }
-    
-    LaunchedEffect(minuteListState.firstVisibleItemIndex) {
+
+    // Detect minute changes from user scrolling
+    LaunchedEffect(minuteListState.firstVisibleItemIndex, minuteListState.isScrollInProgress) {
         if (!minuteListState.isScrollInProgress) {
-            val newMinute = minuteListState.firstVisibleItemIndex
-            if (newMinute != minute) {
+            // The selected item is the one at the center, accounting for padding
+            val selectedIndex = minuteListState.firstVisibleItemIndex - paddingItems
+            val newMinute = selectedIndex.coerceIn(0, 59)
+            if (newMinute != lastReportedMinute) {
+                lastReportedMinute = newMinute
                 haptic.triggerHaptic(HapticType.LIGHT)
                 onTimeChanged(hour, newMinute)
             }
@@ -77,12 +109,22 @@ fun TimePicker(
                 flingBehavior = rememberSnapFlingBehavior(lazyListState = hourListState),
                 modifier = Modifier.fillMaxSize()
             ) {
+                // Add padding items to allow first and last items to be centered
+                items(paddingItems) {
+                    TimePickerItem(value = "", isSelected = false)
+                }
+
                 items(24) { index ->
-                    val isSelected = index == hourListState.firstVisibleItemIndex
+                    val isSelected = (index + paddingItems) == hourListState.firstVisibleItemIndex
                     TimePickerItem(
                         value = String.format("%02d", index),
                         isSelected = isSelected
                     )
+                }
+
+                // Add padding items at the bottom
+                items(paddingItems) {
+                    TimePickerItem(value = "", isSelected = false)
                 }
             }
         }
@@ -106,12 +148,22 @@ fun TimePicker(
                 flingBehavior = rememberSnapFlingBehavior(lazyListState = minuteListState),
                 modifier = Modifier.fillMaxSize()
             ) {
+                // Add padding items to allow first and last items to be centered
+                items(paddingItems) {
+                    TimePickerItem(value = "", isSelected = false)
+                }
+
                 items(60) { index ->
-                    val isSelected = index == minuteListState.firstVisibleItemIndex
+                    val isSelected = (index + paddingItems) == minuteListState.firstVisibleItemIndex
                     TimePickerItem(
                         value = String.format("%02d", index),
                         isSelected = isSelected
                     )
+                }
+
+                // Add padding items at the bottom
+                items(paddingItems) {
+                    TimePickerItem(value = "", isSelected = false)
                 }
             }
         }
