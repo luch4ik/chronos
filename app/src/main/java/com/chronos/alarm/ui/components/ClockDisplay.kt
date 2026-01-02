@@ -1,6 +1,5 @@
 package com.chronos.alarm.ui.components
 
-/* PENDING CLAUDE REVIEW */
 // Phase 2: Design System - ClockDisplay
 // Implements brutalist clock with date tag, PM/AM badge, and blinking colon
 // Matches React ClockDisplay.tsx behavior

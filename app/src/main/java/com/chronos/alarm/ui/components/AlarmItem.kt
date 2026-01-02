@@ -1,6 +1,5 @@
 package com.chronos.alarm.ui.components
 
-/* PENDING CLAUDE REVIEW */
 // Phase 2: Design System - AlarmItem
 // Displays alarm with all badges: schedule, challenges, wake-up check, SOS, audio
 // Matches React AlarmItem.tsx component

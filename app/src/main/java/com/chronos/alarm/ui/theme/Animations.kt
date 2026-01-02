@@ -1,6 +1,5 @@
 package com.chronos.alarm.ui.theme
 
-/* PENDING CLAUDE REVIEW */
 // Phase 2: Design System - Animation System
 // Spring-based animations matching Framer Motion patterns
 // Created by: general agent (Task tool session ses_484e60b33ffei4JvgOUr88S0mo)

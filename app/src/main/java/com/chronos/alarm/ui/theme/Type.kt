@@ -1,6 +1,5 @@
 package com.chronos.alarm.ui.theme
 
-/* PENDING CLAUDE REVIEW */
 // Phase 2: Design System - Typography System
 // Loads Inter and Space Grotesk fonts from /app/src/main/res/font/
 // Configured to match React app typography scale

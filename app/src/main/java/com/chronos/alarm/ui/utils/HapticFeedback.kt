@@ -1,6 +1,5 @@
 package com.chronos.alarm.ui.utils
 
-/* PENDING CLAUDE REVIEW */
 // Phase 2: Design System - Haptic Feedback Utility
 // Provides vibration feedback for user interactions
 // Created by: general agent (Task tool session ses_484e60b33ffei4JvgOUr88S0mo)

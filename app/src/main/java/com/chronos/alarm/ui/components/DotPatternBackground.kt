@@ -1,6 +1,5 @@
 package com.chronos.alarm.ui.components
 
-/* PENDING CLAUDE REVIEW */
 // Phase 2: Design System - Dot Pattern Background
 // Draws radial gradient dot pattern matching React Background.tsx
 // 24px spacing, 40% opacity, uses Canvas for performance
