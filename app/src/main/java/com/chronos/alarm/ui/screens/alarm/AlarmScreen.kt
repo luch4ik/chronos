@@ -14,10 +14,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.chronos.alarm.challenge.BluetoothChallenge
 import com.chronos.alarm.challenge.BurstChallenge
 import com.chronos.alarm.challenge.MathChallenge
 import com.chronos.alarm.challenge.MemoryChallenge
 import com.chronos.alarm.challenge.TypingChallenge
+import com.chronos.alarm.challenge.VelocityChallenge
 import com.chronos.alarm.domain.model.ChallengeType
 import com.chronos.alarm.ui.theme.BrutalistButton
 import java.text.SimpleDateFormat
@@ -142,20 +144,14 @@ private fun AlarmContent(
                                 config = currentChallenge,
                                 onCompleted = onChallengeCompleted
                             )
-                            ChallengeType.VELOCITY -> {
-                                // TODO: Implement VelocityChallenge
-                                PlaceholderChallenge(
-                                    type = "VELOCITY",
-                                    onCompleted = onChallengeCompleted
-                                )
-                            }
-                            ChallengeType.BLUETOOTH -> {
-                                // TODO: Implement BluetoothChallenge
-                                PlaceholderChallenge(
-                                    type = "BLUETOOTH",
-                                    onCompleted = onChallengeCompleted
-                                )
-                            }
+                            ChallengeType.VELOCITY -> VelocityChallenge(
+                                config = currentChallenge,
+                                onSuccess = onChallengeCompleted
+                            )
+                            ChallengeType.BLUETOOTH -> BluetoothChallenge(
+                                config = currentChallenge,
+                                onSuccess = onChallengeCompleted
+                            )
                         }
                     }
                 }
