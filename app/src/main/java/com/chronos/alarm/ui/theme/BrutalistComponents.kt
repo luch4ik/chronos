@@ -1,6 +1,5 @@
 package com.chronos.alarm.ui.theme
 
-/* PENDING CLAUDE REVIEW */
 // Phase 2: Design System - Brutalist Components
 // Implements reusable brutalist UI components with hover/press states and haptic feedback
 // BrutalistButton: Button with spring-based shadow animation
